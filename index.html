@@ -267,6 +267,163 @@
           </section>
         </section>
         <!-- Объекты end -->
+        <!-- Функции start -->
+        <section>
+          <section>
+            <h3>Функции</h3>
+          </section>
+          <section>
+            <h4>1. Одна функция - одно действие</h4>
+            <div class="r-stack">
+              <pre class="fragment fade-in-then-out">
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                const users = [
+                  {id: 1, age: 12}, {id: 2, age: 15},
+                  {id: 3, age: 18}, {id: 4, age: 13},
+                ];
+
+                const calculateAndShowAverageAge = (users) => {
+                  if (users.length === 0){
+                    return 0;
+                  }
+
+                  let sum = 0;
+                  for (let i = 0; i< users.length; i++) {
+                    sum += users[i].age;
+                  }
+
+                  const average = Math.floor(sum / users.length);
+                  alert(`Средний возраст посетителей: ${average}`);
+                };
+
+                calculateAndShowAverageAge(users);
+                // alert(Средний возраст посетителей: 14);
+              </code>
+              </pre>
+              <pre class="fragment fade-in-then-out">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const orders = [
+                    {id: 1, value: 100}, {id: 2, value: 110},
+                    {id: 3, value: 200}, {id: 4, value: 150}
+                    ];
+
+                    const calculateAndShowAverageOrderValue = (orders) => {
+                        if (orders.length === 0){
+                            return 0;
+                        }
+                        let sum = 0;
+                        for (let i = 0; i< orders.length; i++) {
+                            sum += orders[i].value;
+                        }
+
+                        const average = Math.floor(sum / orders.length);
+                            alert(`Средняя стоимость заказов: ${average}`);
+                    };
+
+                    calculateAndShowAverageOrderValue(orders);
+                    // alert(Средняя стоимость заказов: 140);
+                 </code>
+              </pre>
+              <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+
+                         data-line-numbers="1-9|11-12|14-15"
+                 >
+                   const calculateAverage = (values) => {
+                    if (values.length === 0){
+                        return 0;
+                    }
+
+                    let sum = 0;
+                    values.forEach(value => sum += value);
+                    return Math.floor(sum / values.length);
+                };
+
+                const averageAge = calculateAverage(users.map(({age}) => age));
+                const averageOrdersValue = calculateAverage(orders.map(({value}) => value));
+
+                alert(`Средний возраст посетителей: ${averageAge}`);
+                alert(`Средняя стоимость заказов: ${averageOrdersValue}`);
+                 </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h4>2. Старайтесь писать чистые функции</h4>
+            <div class="r-stack">
+              <div class="fragment fade-in-then-out">
+                <p style="color: yellowgreen">Правила чистой функции</p>
+                <ul style="list-style: none">
+                  <li>Не имеет побочных эффектов (api, console и пр.)</li>
+                  <li>Сколько раз ни вызови - один результат</li>
+                  <li>Не мутирует данные</li>
+                  <li>Не зависит от внешних данных</li>
+                </ul>
+              </div>
+
+              <div class="fragment">
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const DISCOUNT = 15;
+
+                   const calculateDiscount = (cost) => cost * (100 - DISCOUNT);
+                 </code>
+            </pre>
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const generateID = () => Math.floor(Math.random() * 10000);
+
+                   console.log(generateID()); // 7602
+                   console.log(generateID()); // 7131
+                 </code>
+              </pre>
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   let id = 0;
+                   const createPerson = name => ({ id: ++id, name});
+
+                   console.log(createPerson("Биба")); // {id: 1, name: "Биба"}
+                   console.log(createPerson("Боба")); // {id: 2, name: "Боба"}
+                 </code>
+              </pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h4>3. Количество аргументов и размер</h4>
+
+            <blockquote class="fragment">
+              Количество аргументов - не более 7
+            </blockquote>
+            <blockquote class="fragment">
+              Размер ~ чтобы влазило в экран или не более 100 строк
+            </blockquote>
+          </section>
+        </section>
+        <!-- Функции end -->
       </ul>
     </div>
 
