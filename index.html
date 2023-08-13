@@ -30,28 +30,177 @@
         <section>
           <ul style="list-style: none">
             <li>Чистый код</li>
-            <ul style="list-style: none; margin-left: 50px">
-              <li>Переменные</li>
-              <li>Функции</li>
-              <li>Объекты</li>
-              <li>Комментарии</li>
-            </ul>
             <li>Javascript Patterns</li>
-            <ul style="list-style: none; margin-left: 50px">
-              <li>Декораторы</li>
-              <li></li>
-              <li></li>
-            </ul>
           </ul>
         </section>
-        <!-- Чистый код start -->
+        <!-- Чистый код вступление start -->
         <section>
           <section><h3>Чистый код</h3></section>
           <section>
-
+            <h4>Фразы-паразиты</h4>
+            <ul style="list-style: none">
+              <li>
+                <span class="fragment highlight-green">мне</span>
+                мой код понятен. (с)
+              </li>
+              <li>
+                и так
+                <span class="fragment highlight-green">работает</span>. (с)
+              </li>
+              <li>
+                мы
+                <span class="fragment highlight-green">никогда</span>
+                не будем вносить сюда изменения. (с)
+              </li>
+              <li>
+                <span class="fragment highlight-green">потом</span>
+                перепишу. (с)
+              </li>
+            </ul>
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="img/clear_code/1.png" />
+              <img src="img/clear_code/2.png" class="fragment" />
+              <img src="img/clear_code/3.png" class="fragment" />
+            </div>
+          </section>
+          <section>
+            <p style="font-size: 200px">∞</p>
           </section>
         </section>
-        <!-- Чистый код end -->
+        <!-- Чистый код вступление end -->
+        <!-- Нейминг start -->
+        <section>
+          <section>
+            <h3>Нейминг</h3>
+          </section>
+          <section>
+            <h4>1. Никаких сокращений</h4>
+            <pre>
+              <code
+                class="javascript"
+                data-trim
+                data-noescape
+              >
+                // Плохо
+                const frmt = 'dd-mm-yyyy';
+                const string = ' Упс!';
+                const page = 5;
+
+                const names = users.map((i) => i.firstName + i.lastName );
+              </code>
+               </pre>
+            <pre class="fragment">
+              <code
+                class="javascript"
+                data-trim
+                data-noescape
+                data-line-numbers="2|3|4|6-8"
+              >
+                // Хорошо
+                const dateFormat = 'dd-mm-yyyy';
+                const errorTitle = ' Упс!';
+                const currentPage = 5;
+
+                const fullNames = users.map((user) =>
+                  user.firstName + user.lastName
+                );
+              </code>
+              </pre>
+          </section>
+          <section>
+            <h4>2. Типы и классы начинаются с большой буквы</h4>
+            <h4>3. Никаких T/I</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                // Плохо
+                type user = {id: string};
+                type TUser = {id: string};
+                interface IMovie = {id: string};
+              </code>
+            </pre>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                // Хорошо
+                type User = {id: string};
+                interface Movie = {id: string};
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>4. Функции должны начинаться с глаголов</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                function filteredUsers = (users) => users.filter(...)
+                 👆// это переменная или функция?
+
+                // Хорошо:
+                function filterUsers = (users) => users.filter(...)
+                function getFilteredUsers = (users) => users.filter(...)
+               </code>
+            </pre>
+          </section>
+          <section>
+            <h4>
+              Нейминг переменной может содержать префиксы<br />
+              (is-/has-/should-/can-)
+            </h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                  const disabled = false;
+                  const notAvailableForEditing = true;
+                 // 👆пока прочитаешь переменную уже состаришься
+                  const areProductsPresent = true;
+
+                  // Хорошо:
+                  const isDisabled = false;
+                  const isEnabled = true;
+
+                  const canEdit = false;
+                  const hasProducts = true;
+               </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Нейминг должен учитывать единственное/множественное число</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                id.forEach((i) => console.log(i));
+                // только по forEach стало понятно что здесь множество id
+
+                // Хорошо:
+                ids.forEach((id) => console.log(id));
+                // теперь переменная говорит нам о том, что это множество
+                // внутри цикла можно использовать единственное число вместо сокращения
+               </code>
+            </pre>
+          </section>
+        </section>
+        <!-- Нейминг end -->
       </ul>
     </div>
 
