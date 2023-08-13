@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Тестирование фронтенда & Cypress</title>
+    <title>Javascript patterns & Чистый код</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -201,6 +201,72 @@
           </section>
         </section>
         <!-- Нейминг end -->
+        <!-- Объекты start -->
+        <section>
+          <section><h3>Объекты</h3></section>
+          <section>
+            <blockquote>Всё в Javascript - это объекты</blockquote>
+          </section>
+          <section>
+            <img src="img/objects/0.png" />
+          </section>
+          <section>
+            <h4>Замена switch и if</h4>
+            <pre>
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                let value = 2 + 2;
+
+                switch (value) {
+                  case 3:
+                    alert( 'Маловато' ); break;
+                  case 4:
+                    alert( 'В точку!' ); break;
+                  case 5:
+                    alert( 'Перебор' ); break;
+                  default:
+                    alert( "Нет таких значений" );
+                }
+              </code>
+              </pre>
+            <pre class="fragment">
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                const titles = {
+                  3: 'Маловато',
+                  4: 'В точку!',
+                  5: 'Перебор'
+                }
+
+                const value = 2 + 2;
+                const title = titles[value] || 'Нет таких значений'.
+
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Условный рендеринг</h4>
+            <div class="r-stack">
+              <img src="img/objects/1.png" />
+              <img src="img/objects/2.png" class="fragment" />
+              <img src="img/objects/3.png" class="fragment" />
+            </div>
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="img/objects/4.png" class="fragment fade-in-then-out" />
+              <img src="img/objects/5.png" class="fragment fade-in-then-out" />
+              <img src="img/objects/6.png" class="fragment" />
+            </div>
+          </section>
+        </section>
+        <!-- Объекты end -->
       </ul>
     </div>
 
