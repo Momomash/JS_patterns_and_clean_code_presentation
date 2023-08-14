@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/html"
+  xmlns="http://www.w3.org/1999/html"
+>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -26,6 +30,7 @@
           <h3>#поговорим_за_frontend</h3>
           <br />
           <h2>Javascript patterns & Чистый код</h2>
+          <h3>Эпизод 1: Скрытая угроза</h3>
         </section>
         <section>
           <ul style="list-style: none">
@@ -424,6 +429,135 @@
           </section>
         </section>
         <!-- Функции end -->
+        <!-- If start -->
+        <section>
+          <section>
+            <h3>If-ы</h3>
+          </section>
+          <section>
+            <h3>1. Старайтесь избегать больших вложенностей</h3>
+            <div class="r-stack">
+              <img src="img/ifs/1.png" />
+              <img class="fragment" src="img/ifs/2.png" />
+            </div>
+          </section>
+          <section>
+            <h3>2. Обрабатывайте исключения в начале</h3>
+            <div class="r-stack">
+              <pre>
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const getAnyResult = (array: string[]) => {
+                     if ... do any
+                     if ... do any
+                     if ... do any
+
+                     if (array.length === 0){
+                       return []
+                     }
+                   }
+                 </code>
+              </pre>
+              <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const getAnyResult = (array: string[]) => {
+                     if (array.length === 0){
+                       return []
+                     }
+
+                     if ... do any
+                     if ... do any
+                     if ... do any
+                   }
+                 </code>
+              </pre>
+            </div>
+          </section>
+        </section>
+        <!-- If end -->
+
+        <!-- Комментарии start -->
+        <section>
+          <section><h3>Комментарии</h3></section>
+          <section>
+            <blockquote>
+              Комментарии к коду - это
+              <span style="color: yellowgreen">извинение/оправдание</span> перед
+              собой или другими разработчиками
+            </blockquote>
+
+            <div class="fragment">
+              <pre>
+                 <code class="javascript" data-trim data-noescape>
+                  // оно ужасно, но не трогаем чтобы не сломать
+                  // быстрый хак для релиза, потом сделаем хорошо
+
+                  // @ts-ignore
+                  // eslint-disable-next-line
+
+                  // https://stackoverflow.com/questions/7616461
+                 </code>
+              </pre>
+            </div>
+            <a
+              class="fragment"
+              href="https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/"
+              >https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/</a
+            >
+          </section>
+          <section>
+            <h4>Полезные комментарии</h4>
+            <img class="fragment" src="img/comments/1.png" />
+            <img class="fragment" src="img/comments/2.png" />
+            <div class="fragment">
+              <pre>
+                 <code class="javascript" data-trim data-noescape>
+                   // TODO: remove sx props
+                   // TODO: refactor it in JIRA-1999
+                 </code>
+                </pre>
+            </div>
+          </section>
+        </section>
+        <!-- Комментарии end -->
+        <section>
+          <section>
+            <h3>Что почитать</h3>
+            <ul style="list-style: none">
+              <li class="fragment">
+                <a href="https://www.labirint.ru/books/272529/"
+                  >Стив Макконнелл: Совершенный код (часть 2-4)</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://google.github.io/styleguide/javascriptguide.xml"
+                  >Google JavaScript Style Guide</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://holyjs.ru/talks/a403972d181f454ab8c0d26043c4dcce/"
+                  >Алексей Золотых: Борьба с ветрянными мельницами, или Как жить
+                  с техническим долгом (HolyJS 2023 Spring)</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/"
+                  >https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/</a
+                >
+              </li>
+            </ul>
+          </section>
+        </section>
       </ul>
     </div>
 
