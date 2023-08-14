@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/html"
+  xmlns="http://www.w3.org/1999/html"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Javascript patterns & Чистый код</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/dracula.css" />
+    <link rel="stylesheet" href="css/custom_styles.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <ul class="slides">
+        <!--Вступление-->
+        <section style="text-align: left">
+          <h3>#поговорим_за_frontend</h3>
+          <br />
+          <h2>Javascript patterns & Чистый код</h2>
+          <h3>Эпизод 1: Скрытая угроза</h3>
+        </section>
+        <section>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <ul style="list-style: none; margin-right: 20px">
+              <li>Чистый код</li>
+              <li class="fragment highlight-red" data-fragment-index="1">
+                Javascript Patterns
+                <span class="fragment" data-fragment-index="1"
+                  >(в следующей серии)</span
+                >
+              </li>
+            </ul>
+            <img
+              class="fragment"
+              data-fragment-index="1"
+              src="img/0.png"
+              style="width: 300px"
+            />
+          </div>
+        </section>
+        <!-- Чистый код вступление start -->
+        <section>
+          <section><h3>Чистый код</h3></section>
+          <section>
+            <h4>Фразы-паразиты</h4>
+            <ul style="list-style: none">
+              <li>
+                <span class="fragment highlight-green">мне</span>
+                мой код понятен. (с)
+              </li>
+              <li>
+                и так
+                <span class="fragment highlight-green">работает</span>. (с)
+              </li>
+              <li>
+                мы
+                <span class="fragment highlight-green">никогда</span>
+                не будем вносить сюда изменения. (с)
+              </li>
+              <li>
+                <span class="fragment highlight-green">потом</span>
+                перепишу. (с)
+              </li>
+            </ul>
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="img/clear_code/1.png" />
+              <img src="img/clear_code/2.png" class="fragment" />
+              <img src="img/clear_code/3.png" class="fragment" />
+            </div>
+          </section>
+          <section>
+            <p style="font-size: 200px">∞</p>
+          </section>
+        </section>
+        <!-- Чистый код вступление end -->
+        <!-- Нейминг start -->
+        <section>
+          <section>
+            <h3>Нейминг</h3>
+          </section>
+          <section>
+            <h4>1. Никаких сокращений</h4>
+            <pre>
+              <code
+                class="javascript"
+                data-trim
+                data-noescape
+              >
+                // Плохо
+                const frmt = 'dd-mm-yyyy';
+                const string = ' Упс!';
+                const page = 5;
+
+                const names = users.map((i) => i.firstName + i.lastName );
+              </code>
+               </pre>
+            <pre class="fragment">
+              <code
+                class="javascript"
+                data-trim
+                data-noescape
+                data-line-numbers="2|3|4|6-8"
+              >
+                // Хорошо
+                const dateFormat = 'dd-mm-yyyy';
+                const errorTitle = ' Упс!';
+                const currentPage = 5;
+
+                const fullNames = users.map((user) =>
+                  user.firstName + user.lastName
+                );
+              </code>
+              </pre>
+          </section>
+          <section>
+            <h4>2. Типы и классы начинаются с большой буквы</h4>
+            <h4>3. Никаких T/I</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                // Плохо
+                type user = {id: string};
+                type TUser = {id: string};
+                interface IMovie = {id: string};
+              </code>
+            </pre>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                // Хорошо
+                type User = {id: string};
+                interface Movie = {id: string};
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>4. Функции должны начинаться с глаголов</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                function filteredUsers = (users) => users.filter(...)
+                 👆// это переменная или функция?
+
+                // Хорошо:
+                function filterUsers = (users) => users.filter(...)
+                function getFilteredUsers = (users) => users.filter(...)
+               </code>
+            </pre>
+          </section>
+          <section>
+            <h4>
+              Нейминг переменной может содержать префиксы<br />
+              (is-/has-/should-/can-)
+            </h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                  const disabled = false;
+                  const notAvailableForEditing = true;
+                 // 👆пока прочитаешь переменную уже состаришься
+                  const areProductsPresent = true;
+
+                  // Хорошо:
+                  const isDisabled = false;
+                  const isEnabled = true;
+
+                  const canEdit = false;
+                  const hasProducts = true;
+               </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Нейминг должен учитывать единственное/множественное число</h4>
+            <pre>
+               <code
+                       class="javascript"
+                       data-trim
+                       data-noescape
+               >
+                 // Плохо:
+                id.forEach((i) => console.log(i));
+                // только по forEach стало понятно что здесь множество id
+
+                // Хорошо:
+                ids.forEach((id) => console.log(id));
+                // теперь переменная говорит нам о том, что это множество
+                // внутри цикла можно использовать единственное число вместо сокращения
+               </code>
+            </pre>
+          </section>
+        </section>
+        <!-- Нейминг end -->
+        <!-- Объекты start -->
+        <section>
+          <section><h3>Объекты</h3></section>
+          <section>
+            <blockquote>Всё в Javascript - это объекты</blockquote>
+          </section>
+          <section>
+            <img src="img/objects/0.png" />
+          </section>
+          <section>
+            <h4>Замена switch и if</h4>
+            <pre>
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                let value = 2 + 2;
+
+                switch (value) {
+                  case 3:
+                    alert( 'Маловато' ); break;
+                  case 4:
+                    alert( 'В точку!' ); break;
+                  case 5:
+                    alert( 'Перебор' ); break;
+                  default:
+                    alert( "Нет таких значений" );
+                }
+              </code>
+              </pre>
+            <pre class="fragment">
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                const titles = {
+                  3: 'Маловато',
+                  4: 'В точку!',
+                  5: 'Перебор'
+                }
+
+                const value = 2 + 2;
+                const title = titles[value] || 'Нет таких значений'.
+
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h4>Условный рендеринг</h4>
+            <div class="r-stack">
+              <img src="img/objects/1.png" />
+              <img src="img/objects/2.png" class="fragment" />
+              <img src="img/objects/3.png" class="fragment" />
+            </div>
+          </section>
+          <section>
+            <div class="r-stack">
+              <img src="img/objects/4.png" class="fragment fade-in-then-out" />
+              <img src="img/objects/5.png" class="fragment fade-in-then-out" />
+              <img src="img/objects/6.png" class="fragment" />
+            </div>
+          </section>
+        </section>
+        <!-- Объекты end -->
+        <!-- Функции start -->
+        <section>
+          <section>
+            <h3>Функции</h3>
+          </section>
+          <section>
+            <h4>1. Одна функция - одно действие</h4>
+            <div class="r-stack">
+              <pre class="fragment fade-in-then-out">
+              <code
+                      class="javascript"
+                      data-trim
+                      data-noescape
+              >
+                const users = [
+                  {id: 1, age: 12}, {id: 2, age: 15},
+                  {id: 3, age: 18}, {id: 4, age: 13},
+                ];
+
+                const calculateAndShowAverageAge = (users) => {
+                  if (users.length === 0){
+                    return 0;
+                  }
+
+                  let sum = 0;
+                  for (let i = 0; i< users.length; i++) {
+                    sum += users[i].age;
+                  }
+
+                  const average = Math.floor(sum / users.length);
+                  alert(`Средний возраст посетителей: ${average}`);
+                };
+
+                calculateAndShowAverageAge(users);
+                // alert(Средний возраст посетителей: 14);
+              </code>
+              </pre>
+              <pre class="fragment fade-in-then-out">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const orders = [
+                    {id: 1, value: 100}, {id: 2, value: 110},
+                    {id: 3, value: 200}, {id: 4, value: 150}
+                    ];
+
+                    const calculateAndShowAverageOrderValue = (orders) => {
+                        if (orders.length === 0){
+                            return 0;
+                        }
+                        let sum = 0;
+                        for (let i = 0; i< orders.length; i++) {
+                            sum += orders[i].value;
+                        }
+
+                        const average = Math.floor(sum / orders.length);
+                            alert(`Средняя стоимость заказов: ${average}`);
+                    };
+
+                    calculateAndShowAverageOrderValue(orders);
+                    // alert(Средняя стоимость заказов: 140);
+                 </code>
+              </pre>
+              <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+
+                         data-line-numbers="1-9|11-12|14-15"
+                 >
+                   const calculateAverage = (values) => {
+                    if (values.length === 0){
+                        return 0;
+                    }
+
+                    let sum = 0;
+                    values.forEach(value => sum += value);
+                    return Math.floor(sum / values.length);
+                };
+
+                const averageAge = calculateAverage(users.map(({age}) => age));
+                const averageOrdersValue = calculateAverage(orders.map(({value}) => value));
+
+                alert(`Средний возраст посетителей: ${averageAge}`);
+                alert(`Средняя стоимость заказов: ${averageOrdersValue}`);
+                 </code>
+              </pre>
+            </div>
+          </section>
+          <section>
+            <h4>2. Старайтесь писать чистые функции</h4>
+            <div class="r-stack">
+              <div class="fragment fade-in-then-out">
+                <p style="color: yellowgreen">Правила чистой функции</p>
+                <ul style="list-style: none">
+                  <li>Не имеет побочных эффектов (api, console и пр.)</li>
+                  <li>Сколько раз ни вызови - один результат</li>
+                  <li>Не мутирует данные</li>
+                  <li>Не зависит от внешних данных</li>
+                </ul>
+              </div>
+
+              <div class="fragment">
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const DISCOUNT = 15;
+
+                   const calculateDiscount = (cost) => cost * (100 - DISCOUNT);
+                 </code>
+            </pre>
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const generateID = () => Math.floor(Math.random() * 10000);
+
+                   console.log(generateID()); // 7602
+                   console.log(generateID()); // 7131
+                 </code>
+              </pre>
+                <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   let id = 0;
+                   const createPerson = name => ({ id: ++id, name});
+
+                   console.log(createPerson("Биба")); // {id: 1, name: "Биба"}
+                   console.log(createPerson("Боба")); // {id: 2, name: "Боба"}
+                 </code>
+              </pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h4>3. Количество аргументов и размер</h4>
+
+            <blockquote class="fragment">
+              Количество аргументов - не более 7
+            </blockquote>
+            <blockquote class="fragment">
+              Размер ~ чтобы влазило в экран или не более 100 строк
+            </blockquote>
+          </section>
+        </section>
+        <!-- Функции end -->
+        <!-- If start -->
+        <section>
+          <section>
+            <h3>If-ы</h3>
+          </section>
+          <section>
+            <h3>1. Старайтесь избегать больших вложенностей</h3>
+            <div class="r-stack">
+              <img src="img/ifs/1.png" />
+              <img class="fragment" src="img/ifs/2.png" />
+            </div>
+          </section>
+          <section>
+            <h3>2. Обрабатывайте исключения в начале</h3>
+            <div class="r-stack">
+              <pre>
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const getAnyResult = (array: string[]) => {
+                     if ... do any
+                     if ... do any
+                     if ... do any
+
+                     if (array.length === 0){
+                       return []
+                     }
+                   }
+                 </code>
+              </pre>
+              <pre class="fragment">
+                 <code
+                         class="javascript"
+                         data-trim
+                         data-noescape
+                 >
+                   const getAnyResult = (array: string[]) => {
+                     if (array.length === 0){
+                       return []
+                     }
+
+                     if ... do any
+                     if ... do any
+                     if ... do any
+                   }
+                 </code>
+              </pre>
+            </div>
+          </section>
+        </section>
+        <!-- If end -->
+
+        <!-- Комментарии start -->
+        <section>
+          <section><h3>Комментарии</h3></section>
+          <section>
+            <blockquote>
+              Комментарии к коду - это
+              <span style="color: yellowgreen">извинение/оправдание</span> перед
+              собой или другими разработчиками
+            </blockquote>
+
+            <div class="fragment">
+              <pre>
+                 <code class="javascript" data-trim data-noescape>
+                  // оно ужасно, но не трогаем чтобы не сломать
+                  // быстрый хак для релиза, потом сделаем хорошо
+
+                  // @ts-ignore
+                  // eslint-disable-next-line
+
+                  // https://stackoverflow.com/questions/7616461
+                 </code>
+              </pre>
+            </div>
+            <a
+              class="fragment"
+              href="https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/"
+              >https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/</a
+            >
+          </section>
+          <section>
+            <h4>Полезные комментарии</h4>
+            <img class="fragment" src="img/comments/1.png" />
+            <img class="fragment" src="img/comments/2.png" />
+            <div class="fragment">
+              <pre>
+                 <code class="javascript" data-trim data-noescape>
+                   // TODO: remove sx props
+                   // TODO: refactor it in JIRA-1999
+                 </code>
+                </pre>
+            </div>
+          </section>
+        </section>
+        <!-- Комментарии end -->
+        <section>
+          <section>
+            <h3>Что почитать</h3>
+            <ul style="list-style: none">
+              <li class="fragment">
+                <a href="https://www.labirint.ru/books/272529/"
+                  >Стив Макконнелл: Совершенный код (часть 2-4)</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://google.github.io/styleguide/javascriptguide.xml"
+                  >Google JavaScript Style Guide</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://holyjs.ru/talks/a403972d181f454ab8c0d26043c4dcce/"
+                  >Алексей Золотых: Борьба с ветрянными мельницами, или Как жить
+                  с техническим долгом (HolyJS 2023 Spring)</a
+                >
+              </li>
+              <li class="fragment">
+                <a
+                  href="https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/"
+                  >https://skillbox.ru/media/code/zabavnye-kommentarii-v-kode/</a
+                >
+              </li>
+            </ul>
+          </section>
+        </section>
+      </ul>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        transition: "none",
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
